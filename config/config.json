@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "sk-default-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/skDefault/SkDefaultWebPart.js",
+          "manifest": "./src/webparts/skDefault/SkDefaultWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "SkDefaultWebPartStrings": "lib/webparts/skDefault/loc/{locale}.js"
+  }
+}
