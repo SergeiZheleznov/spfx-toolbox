@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "color-scheme-test-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/colorSchemeTest/ColorSchemeTestWebPart.js",
+          "manifest": "./src/webparts/colorSchemeTest/ColorSchemeTestWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ColorSchemeTestWebPartStrings": "lib/webparts/colorSchemeTest/loc/{locale}.js"
+  }
+}
