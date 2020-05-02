@@ -2,9 +2,9 @@
   "@microsoft/generator-sharepoint": {
     "isCreatingSolution": true,
     "environment": "spo",
-    "version": "1.9.1",
-    "libraryName": "sks-color-scheme",
-    "libraryId": "2ec564d8-cc3b-496b-bb2c-74522e3b3f3a",
+    "version": "1.10.0",
+    "libraryName": "sks-sp-colors",
+    "libraryId": "488e3c80-c07f-4041-a5fd-7b8b11deba9c",
     "packageManager": "npm",
     "isDomainIsolated": false,
     "componentType": "webpart"

@@ -2,17 +2,17 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
   "version": "2.0",
   "bundles": {
-    "color-scheme-test-web-part": {
+    "sp-colors-web-part": {
       "components": [
         {
-          "entrypoint": "./lib/webparts/colorSchemeTest/ColorSchemeTestWebPart.js",
-          "manifest": "./src/webparts/colorSchemeTest/ColorSchemeTestWebPart.manifest.json"
+          "entrypoint": "./lib/webparts/spColors/SpColorsWebPart.js",
+          "manifest": "./src/webparts/spColors/SpColorsWebPart.manifest.json"
         }
       ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "ColorSchemeTestWebPartStrings": "lib/webparts/colorSchemeTest/loc/{locale}.js"
+    "SpColorsWebPartStrings": "lib/webparts/spColors/loc/{locale}.js"
   }
 }

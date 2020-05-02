@@ -1,4 +1,4 @@
-## sks-color-scheme
+## sks-sp-colors
 
 This is where you include your WebPart documentation.
 
