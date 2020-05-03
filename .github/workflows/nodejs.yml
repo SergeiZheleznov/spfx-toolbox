@@ -32,3 +32,8 @@ jobs:
       working-directory: ${{env.working-directory}}
     - run: gulp package-solution --ship
       working-directory: ${{env.working-directory}}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: sp-styles
+        path: ${{env.working-directory}}/sharepoint/solution/sp-styles.sppkg
