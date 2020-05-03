@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "theme-inspector-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/themeInspector/ThemeInspectorWebPart.js",
+          "manifest": "./src/webparts/themeInspector/ThemeInspectorWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ThemeInspectorWebPartStrings": "lib/webparts/themeInspector/loc/{locale}.js"
+  }
+}
