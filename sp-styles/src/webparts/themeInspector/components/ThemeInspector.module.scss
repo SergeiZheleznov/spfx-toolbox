@@ -1,10 +1,37 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
+$cardSize: 32px;
 
 .themeInspector {
-  .item {
-    padding: 3px 2px;
-    margin: 0 2px 2px 0;
-    border: 1px solid #ccc;
-    float: left;
+  .grid {
+    @include ms-Grid;
+    .row {
+      @include ms-Grid-row;
+      .item {
+        @include ms-Grid-col;
+        @include ms-sm12;
+        @include ms-md6;
+        @include ms-lg3;
+
+        .body {
+          padding: 3px 2px;
+          border: 1px solid transparent;
+          margin: 0 2px 2px 0;
+          .name {
+            height: $cardSize;
+            line-height: $cardSize;
+            display: inline-block;
+            @include ms-font-s;
+          }
+          .color {
+            height: $cardSize;
+            width: $cardSize;
+            float: left;
+            margin-right: 5px;
+            border: 1px solid transparent;
+          }
+        }
+      }
+    }
   }
+
 }
