@@ -16,7 +16,6 @@ export interface IThemeInspectorWebPartProps {
   description: string;
 }
 
-// https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/guidance/supporting-section-backgrounds
 export default class ThemeInspectorWebPart extends BaseClientSideWebPart <IThemeInspectorWebPartProps> {
 
   private themeProvider: ThemeProvider;
