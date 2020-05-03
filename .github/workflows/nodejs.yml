@@ -13,6 +13,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      working-directory: './sp-styles'
 
     strategy:
       matrix:
@@ -25,5 +27,8 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
+      working-directory: ${{env.working-directory}}
     - run: gulp bundle --ship
+      working-directory: ${{env.working-directory}}
     - run: gulp package-solution --ship
+      working-directory: ${{env.working-directory}}
