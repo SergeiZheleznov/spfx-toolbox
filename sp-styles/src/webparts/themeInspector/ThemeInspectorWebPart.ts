@@ -8,8 +8,9 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { ThemeProvider, ThemeChangedEventArgs, IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'ThemeInspectorWebPartStrings';
-import ThemeInspector from './components/ThemeInspector';
+import {ThemeInspector} from './components/ThemeInspector';
 import { IThemeInspectorProps } from './components/IThemeInspectorProps';
+import {ConfigurationProvider} from "../shared/ConfigurationContext";
 
 export interface IThemeInspectorWebPartProps {
   description: string;
@@ -31,6 +32,9 @@ export default class ThemeInspectorWebPart extends BaseClientSideWebPart <ITheme
   }
 
   public render(): void {
+
+    const {themeVariant} = this;
+
     const element: React.ReactElement<IThemeInspectorProps> = React.createElement(
       ThemeInspector,
       {
@@ -38,7 +42,17 @@ export default class ThemeInspectorWebPart extends BaseClientSideWebPart <ITheme
       }
     );
 
-    ReactDom.render(element, this.domElement);
+    const contextWrapper = React.createElement(
+      ConfigurationProvider,
+      {
+        value: {
+          themeVariant,
+        },
+        children: element
+      }
+    );
+
+    ReactDom.render(contextWrapper, this.domElement);
   }
 
   protected onDispose(): void {
