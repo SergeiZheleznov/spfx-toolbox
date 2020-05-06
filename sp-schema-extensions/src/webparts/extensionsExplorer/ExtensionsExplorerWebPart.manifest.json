@@ -1,0 +1,20 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-web-part-manifest.schema.json",
+  "id": "2c36f0cc-88b6-411f-bd86-7c465ab53fa8",
+  "alias": "ExtensionsExplorerWebPart",
+  "componentType": "WebPart",
+  "version": "*",
+  "manifestVersion": 2,
+  "requiresCustomScript": false,
+  "supportedHosts": ["SharePointWebPart"],
+  "preconfiguredEntries": [{
+    "groupId": "5c03119e-3074-46fd-976b-c60198311f70",
+    "group": { "default": "Other" },
+    "title": { "default": "ExtensionsExplorer" },
+    "description": { "default": "ExtensionsExplorer description" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "ExtensionsExplorer"
+    }
+  }]
+}
