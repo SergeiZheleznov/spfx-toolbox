@@ -1,3 +1,5 @@
+import {SchemaExtension} from '@microsoft/microsoft-graph-types';
+
 export interface ICustomSchemaService {
-  getSchemas(): Promise<any>;
+  getAll(): Promise<SchemaExtension[]>;
 }
