@@ -2,24 +2,30 @@ import * as React from 'react';
 import styles from './ExtensionsExplorer.module.scss';
 import { IExtensionsExplorerProps } from './IExtensionsExplorerProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import {SchemaExtension} from '@microsoft/microsoft-graph-types';
+import {useEffect, useState} from "react";
 
-export default class ExtensionsExplorer extends React.Component<IExtensionsExplorerProps, {}> {
-  public render(): React.ReactElement<IExtensionsExplorerProps> {
-    return (
-      <div className={ styles.extensionsExplorer }>
-        <div className={ styles.container }>
-          <div className={ styles.row }>
-            <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
-              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
-            </div>
-          </div>
+export const ExtensionsExplorer: React.FunctionComponent<IExtensionsExplorerProps> = (props) => {
+
+  const [extensionsAvailable, setExtensionsAvailable] = useState<SchemaExtension[]>(new Array<SchemaExtension>());
+
+  useEffect(() => {
+    const {graphClient} = props;
+    (async () => {
+      const response = await graphClient.api('/schemaExtensions').get() as {
+        value: SchemaExtension[]
+      };
+      setExtensionsAvailable(response.value);
+    })();
+  },[]);
+
+  return(
+    <div className={styles.extensionsExplorer}>
+      {extensionsAvailable && extensionsAvailable.length ? extensionsAvailable.map((ext) => (
+        <div>
+          {ext.id} - {ext.description}
         </div>
-      </div>
-    );
-  }
-}
+      )) : 'loading'}
+    </div>
+  );
+};
