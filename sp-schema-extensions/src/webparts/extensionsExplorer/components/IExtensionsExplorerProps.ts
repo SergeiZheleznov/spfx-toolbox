@@ -1,5 +1,5 @@
-import { MSGraphClient } from '@microsoft/sp-http';
+import {ICustomSchemaService} from "../../../shared/interfaces";
 
 export interface IExtensionsExplorerProps {
-  graphClient: MSGraphClient;
+  customSchemaService: ICustomSchemaService;
 }

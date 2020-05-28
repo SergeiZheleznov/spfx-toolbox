@@ -1,5 +1,8 @@
 import {SchemaExtension} from '@microsoft/microsoft-graph-types';
 
 export interface ICustomSchemaService {
-  getAll(): Promise<SchemaExtension[]>;
+  top(value: number): ICustomSchemaService;
+  get(): Promise<SchemaExtension[]>;
+  next(): Promise<SchemaExtension[]>;
+  nextPageExists: boolean;
 }

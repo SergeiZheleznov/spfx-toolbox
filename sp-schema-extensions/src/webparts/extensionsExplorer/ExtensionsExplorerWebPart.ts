@@ -16,6 +16,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'ExtensionsExplorerWebPartStrings';
 import {ExtensionsExplorer} from './components/ExtensionsExplorer';
 import { IExtensionsExplorerProps } from './components/IExtensionsExplorerProps';
+import {CustomSchemaService} from "../../shared/services";
 
 export interface IExtensionsExplorerWebPartProps {
   description: string;
@@ -37,13 +38,17 @@ export default class ExtensionsExplorerWebPart extends BaseClientSideWebPart <IE
     } catch (error) {
       Logger.writeJSON(error, LogLevel.Error);
     }
+
   }
 
   public render(): void {
+
+    const customSchemaService = new CustomSchemaService(this.graphClient, this.manifest.id);
+
     const element: React.ReactElement<IExtensionsExplorerProps> = React.createElement(
       ExtensionsExplorer,
       {
-        graphClient: this.graphClient
+        customSchemaService
       }
     );
 
