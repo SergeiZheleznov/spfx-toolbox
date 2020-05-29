@@ -14,8 +14,7 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'ExtensionsExplorerWebPartStrings';
-import {ExtensionsExplorer} from './components/ExtensionsExplorer';
-import { IExtensionsExplorerProps } from './components/IExtensionsExplorerProps';
+import {ExtensionsExplorer, IExtensionsExplorerProps} from './components';
 import {CustomSchemaService} from "../../shared/services";
 
 export interface IExtensionsExplorerWebPartProps {
@@ -24,7 +23,7 @@ export interface IExtensionsExplorerWebPartProps {
 
 Logger.subscribe(new ConsoleListener());
 Logger.activeLogLevel = LogLevel.Info;
-const LOG_SOURCE: string = 'FeedbackFormWebPart';
+const LOG_SOURCE: string = 'ExtensionsExplorerWebPart';
 
 export default class ExtensionsExplorerWebPart extends BaseClientSideWebPart <IExtensionsExplorerWebPartProps> {
 
@@ -33,25 +32,20 @@ export default class ExtensionsExplorerWebPart extends BaseClientSideWebPart <IE
   public async onInit(): Promise<void> {
     Logger.write(`[${LOG_SOURCE}] onInit()`);
     try {
-      Logger.write(`[${LOG_SOURCE}] trying to retrieve graphClient`);
       this.graphClient = await this.context.msGraphClientFactory.getClient();
     } catch (error) {
       Logger.writeJSON(error, LogLevel.Error);
     }
-
   }
 
   public render(): void {
-
     const customSchemaService = new CustomSchemaService(this.graphClient, this.manifest.id);
-
     const element: React.ReactElement<IExtensionsExplorerProps> = React.createElement(
       ExtensionsExplorer,
       {
         customSchemaService
       }
     );
-
     ReactDom.render(element, this.domElement);
   }
 

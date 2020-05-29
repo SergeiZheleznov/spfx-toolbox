@@ -4,19 +4,24 @@ import { IExtensionsExplorerProps } from './IExtensionsExplorerProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import {SchemaExtension} from '@microsoft/microsoft-graph-types';
 import {useEffect, useState} from "react";
-import {PrimaryButton} from '@fluentui/react';
+import {PrimaryButton, Spinner} from '@fluentui/react';
+import {ExtensionItemViewer, ExtensionsList} from "../";
+import {Logger, LogLevel} from "@pnp/logging";
+
+const LOG_SOURCE: string = 'ExtensionsExplorer';
 
 export const ExtensionsExplorer: React.FunctionComponent<IExtensionsExplorerProps> = (props) => {
 
   const [extensionsAvailable, setExtensionsAvailable] = useState<SchemaExtension[]>(new Array<SchemaExtension>());
+  const [selectedItem, setSelectedItem] = useState<SchemaExtension>();
   const {customSchemaService} = props;
 
   useEffect(() => {
-
+    Logger.write(`[${LOG_SOURCE}] useEffect()`);
     (async () => {
-
       const schemas = await customSchemaService.top(5).get();
       setExtensionsAvailable(schemas);
+      setSelectedItem(schemas[0]);
     })();
   },[]);
 
@@ -33,12 +38,17 @@ export const ExtensionsExplorer: React.FunctionComponent<IExtensionsExplorerProp
 
   return(
     <div className={styles.extensionsExplorer}>
-      {extensionsAvailable && extensionsAvailable.length ? extensionsAvailable.map((ext) => (
-        <div>
-          {ext.id} - {ext.description}: {ext.owner}
+      <div className={styles.row}>
+        <div className={styles.itemsListCol}>
+          {extensionsAvailable && extensionsAvailable.length ?
+            <ExtensionsList setSelectedItem={setSelectedItem} items={extensionsAvailable} /> :
+            <Spinner label="Seriously, still loading..." ariaLive="assertive" labelPosition="top" />}
+          <PrimaryButton onClick={nextButtonClickHandler}>Next</PrimaryButton>
         </div>
-      )) : 'loading'}
-      <PrimaryButton onClick={nextButtonClickHandler}>Next</PrimaryButton>
+        <div className={styles.itemViewerCol}>
+          {selectedItem ? <ExtensionItemViewer schemaExtension={selectedItem} /> : 'empty'}
+        </div>
+      </div>
     </div>
   );
 };

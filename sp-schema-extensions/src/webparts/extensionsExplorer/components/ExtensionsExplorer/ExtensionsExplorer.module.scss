@@ -1,0 +1,36 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.extensionsExplorer {
+
+  .row {
+    @include ms-Grid-row;
+  }
+
+  .itemsListCol {
+    @include ms-Grid-col;
+    @include ms-lg4;
+    @include ms-xl4;
+  }
+
+  .itemViewerCol {
+    @include ms-Grid-col;
+    @include ms-lg8;
+    @include ms-xl8;
+  }
+
+  .title {
+    @include ms-font-xl;
+    @include ms-fontColor-white;
+  }
+
+  .subTitle {
+    @include ms-font-l;
+    @include ms-fontColor-white;
+  }
+
+  .description {
+    @include ms-font-l;
+    @include ms-fontColor-white;
+  }
+
+}
