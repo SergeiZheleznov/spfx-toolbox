@@ -3,7 +3,7 @@ import styles from './ExtensionsExplorer.module.scss';
 import { IExtensionsExplorerProps } from './IExtensionsExplorerProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 import {SchemaExtension} from '@microsoft/microsoft-graph-types';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {PrimaryButton, Spinner} from '@fluentui/react';
 import {ExtensionItemViewer, ExtensionsList} from "../";
 import {Logger, LogLevel} from "@pnp/logging";
@@ -41,7 +41,10 @@ export const ExtensionsExplorer: React.FunctionComponent<IExtensionsExplorerProp
       <div className={styles.row}>
         <div className={styles.itemsListCol}>
           {extensionsAvailable && extensionsAvailable.length ?
-            <ExtensionsList selectedItem={selectedItem} setSelectedItem={setSelectedItem} items={extensionsAvailable} /> :
+            <ExtensionsList
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              items={extensionsAvailable} /> :
             <Spinner label="Seriously, still loading..." ariaLive="assertive" labelPosition="top" />}
           <PrimaryButton onClick={nextButtonClickHandler}>Next</PrimaryButton>
         </div>

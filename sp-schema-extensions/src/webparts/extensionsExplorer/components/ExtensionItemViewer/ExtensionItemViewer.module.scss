@@ -18,7 +18,24 @@
       display: inline-block;
       padding: 3px 5px;
       margin-right: 2px;
-      background: #ccc;
+    }
+  }
+
+  .extProperties {
+    padding: 10px 0;
+    .propertyItem {
+      @include ms-font-s;
+      display: inline-block;
+      margin-right: 2px;
+      margin-bottom: 4px;
+      padding: 2px 4px;
+      .name {
+        @include ms-fontWeight-semibold;
+      }
+      .type {
+        @include ms-fontWeight-regular;
+        opacity: 0.7;
+      }
     }
   }
 }

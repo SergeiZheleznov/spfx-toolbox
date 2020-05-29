@@ -12,10 +12,11 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
+import { ThemeProvider, ThemeChangedEventArgs, IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'ExtensionsExplorerWebPartStrings';
 import {ExtensionsExplorer, IExtensionsExplorerProps} from './components';
 import {CustomSchemaService} from "../../shared/services";
+import {ConfigurationProvider} from "../../shared/ConfigurationContext";
 
 export interface IExtensionsExplorerWebPartProps {
   description: string;
@@ -28,9 +29,18 @@ const LOG_SOURCE: string = 'ExtensionsExplorerWebPart';
 export default class ExtensionsExplorerWebPart extends BaseClientSideWebPart <IExtensionsExplorerWebPartProps> {
 
   private graphClient: MSGraphClient;
+  private themeProvider: ThemeProvider;
+  private themeVariant: IReadonlyTheme | undefined;
 
   public async onInit(): Promise<void> {
     Logger.write(`[${LOG_SOURCE}] onInit()`);
+    this.themeProvider = this.context.serviceScope.consume(ThemeProvider.serviceKey);
+    this.themeVariant = this.themeProvider.tryGetTheme();
+    this.themeProvider.themeChangedEvent.add(this, (args: ThemeChangedEventArgs) => {
+      this.themeVariant = args.theme;
+      this.render();
+    });
+
     try {
       this.graphClient = await this.context.msGraphClientFactory.getClient();
     } catch (error) {
@@ -46,7 +56,18 @@ export default class ExtensionsExplorerWebPart extends BaseClientSideWebPart <IE
         customSchemaService
       }
     );
-    ReactDom.render(element, this.domElement);
+
+    const contextWrapper = React.createElement(
+      ConfigurationProvider,
+      {
+        value: {
+          themeVariant: this.themeVariant,
+        },
+        children: element
+      }
+    );
+
+    ReactDom.render(contextWrapper, this.domElement);
   }
 
   protected onDispose(): void {
