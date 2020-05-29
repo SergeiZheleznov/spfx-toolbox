@@ -5,7 +5,7 @@ import styles from './ExtensionsListItem.module.scss';
 import {useEffect} from "react";
 
 export const ExtensionsListItem: React.FunctionComponent<IExtensionsListItemProps> = (props) => {
-  const {schemaExtension} = props;
+  const {schemaExtension, active} = props;
 
   return(
     <Stack horizontal horizontalAlign={'space-between'} className={styles.listItem}>
@@ -13,7 +13,7 @@ export const ExtensionsListItem: React.FunctionComponent<IExtensionsListItemProp
         {schemaExtension.id}
       </Stack.Item>
       <Stack.Item>
-        <ActionButton data-schema={schemaExtension.id} onClick={props.onItemSelect} iconProps={{iconName: 'ChevronRight'}} />
+        <ActionButton data-schema={schemaExtension.id} onClick={props.onItemSelect} iconProps={{iconName: active ? 'RadioBtnOn' : 'ChevronRight'}} />
       </Stack.Item>
     </Stack>
   );

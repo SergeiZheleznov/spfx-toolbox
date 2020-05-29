@@ -3,4 +3,5 @@ import * as React from "react";
 export interface IExtensionsListItemProps {
   schemaExtension: SchemaExtension;
   onItemSelect(event: React.MouseEvent<HTMLButtonElement>): void;
+  active: boolean;
 }

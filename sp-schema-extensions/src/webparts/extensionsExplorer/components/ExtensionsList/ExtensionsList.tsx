@@ -3,7 +3,7 @@ import {IExtensionsListProps} from "./IExtensionsListProps";
 import {ExtensionsListItem} from "..";
 
 export const ExtensionsList: React.FunctionComponent<IExtensionsListProps> = (props) => {
-  const {items, setSelectedItem} = props;
+  const {items, setSelectedItem, selectedItem} = props;
 
   const onItemSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
     const schemaId: string = event.currentTarget.dataset['schema'];
@@ -16,7 +16,12 @@ export const ExtensionsList: React.FunctionComponent<IExtensionsListProps> = (pr
 
   return(
     <div>
-      {items.map((schemaExtension)=>(<ExtensionsListItem schemaExtension={schemaExtension} onItemSelect={onItemSelect} />))}
+      {items.map((schemaExtension)=>(
+        <ExtensionsListItem
+          active={selectedItem && schemaExtension.id === selectedItem.id }
+          schemaExtension={schemaExtension}
+          onItemSelect={onItemSelect} />
+      ))}
     </div>
   );
 };

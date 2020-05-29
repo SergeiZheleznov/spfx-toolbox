@@ -1,0 +1,24 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.extensionItemViewer {
+  .extId {
+    @include ms-font-xl;
+    margin-bottom: 5px;
+    sup {
+      @include ms-font-s;
+      margin-left: 3px;
+    }
+  }
+  .extDescription {
+    margin-top: 5px;
+  }
+  .extTargetTypes {
+    span {
+      @include ms-font-s;
+      display: inline-block;
+      padding: 3px 5px;
+      margin-right: 2px;
+      background: #ccc;
+    }
+  }
+}
