@@ -30,4 +30,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: sp-styles
-        path: ${{env.working-directory}}/sharepoint/solution/sp-custom-schema.sppkg
+        path: ${{env.working-directory}}/sharepoint/solution/sp-schema-extensions.sppkg
