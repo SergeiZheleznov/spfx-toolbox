@@ -12,7 +12,7 @@
     "test": "gulp test"
   },
   "dependencies": {
-    "@fluentui/react": "^7.110.1",
+    "@fluentui/react": "^7.117.0",
     "@microsoft/sp-core-library": "1.10.0",
     "@microsoft/sp-lodash-subset": "1.10.0",
     "@microsoft/sp-office-ui-fabric-core": "1.10.0",
@@ -23,7 +23,7 @@
     "@types/react-dom": "16.8.3",
     "@types/webpack-env": "1.13.1",
     "copy-to-clipboard": "^3.3.1",
-    "office-ui-fabric-react": "6.189.2",
+    "office-ui-fabric-react": "^7.117.0",
     "react": "16.8.5",
     "react-dom": "16.8.5"
   },
@@ -35,7 +35,7 @@
     "@microsoft/sp-tslint-rules": "1.10.0",
     "@microsoft/sp-module-interfaces": "1.10.0",
     "@microsoft/sp-webpart-workbench": "1.10.0",
-    "@microsoft/rush-stack-compiler-3.3": "0.3.5",
+    "@microsoft/rush-stack-compiler-3.3": "^0.6.1",
     "gulp": "~3.9.1",
     "@types/chai": "3.4.34",
     "@types/mocha": "2.2.38",

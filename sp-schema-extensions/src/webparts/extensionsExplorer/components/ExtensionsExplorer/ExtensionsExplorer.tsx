@@ -38,20 +38,17 @@ export const ExtensionsExplorer: React.FunctionComponent<IExtensionsExplorerProp
 
   return(
     <div className={styles.extensionsExplorer}>
-      <div className={styles.row}>
-        <div className={styles.itemsListCol}>
-          {extensionsAvailable && extensionsAvailable.length ?
-            <ExtensionsList
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              items={extensionsAvailable} /> :
-            <Spinner label="Seriously, still loading..." ariaLive="assertive" labelPosition="top" />}
-          <PrimaryButton onClick={nextButtonClickHandler}>Next</PrimaryButton>
-        </div>
-        <div className={styles.itemViewerCol}>
-          {selectedItem ? <ExtensionItemViewer schemaExtension={selectedItem} /> : 'empty'}
-        </div>
-      </div>
+
+      {extensionsAvailable && extensionsAvailable.length ?
+        <ExtensionsList
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+          items={extensionsAvailable} /> :
+        <Spinner label="Seriously, still loading..." ariaLive="assertive" labelPosition="top" />
+      }
+      <PrimaryButton onClick={nextButtonClickHandler}>Next</PrimaryButton>
+
+      {selectedItem ? <ExtensionItemViewer schemaExtension={selectedItem} /> : 'empty'}
     </div>
   );
 };

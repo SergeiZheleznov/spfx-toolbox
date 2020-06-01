@@ -1,45 +1,48 @@
 import * as React from 'react';
 import styles from './ThemeInspector.module.scss';
 import { IThemeInspectorProps } from './IThemeInspectorProps';
-import {useContext} from "react";
-import { IReadonlyTheme } from '@microsoft/sp-component-base';
+import {useContext, useEffect, useState} from "react";
 import {ConfigurationContext} from "../../shared/ConfigurationContext";
-import {Stack, IconButton} from '@fluentui/react';
 import * as copy from 'copy-to-clipboard';
+import {SearchBox} from '@fluentui/react';
+import {ColorCard} from "./ColorCard/ColorCard";
+
+interface Color {
+  color: string;
+  name: string;
+}
 
 export const ThemeInspector: React.FunctionComponent<IThemeInspectorProps> = (props) => {
   const config = useContext(ConfigurationContext);
-  const {semanticColors}: IReadonlyTheme = config.themeVariant;
+  const {semanticColors} = config.themeVariant;
+  const [searchString, setSearchString] = useState<string>('');
+
+  const onSearchBoxChanged = (event?: React.ChangeEvent<HTMLInputElement>, newValue?: string) => {
+    setSearchString(newValue);
+  };
+
   const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
     copy(event.currentTarget.dataset['color']);
   };
+
+  const colors: Color[] = [];
+  Object.keys(semanticColors).forEach((key) => {
+    if (!searchString || key.toLowerCase().indexOf(searchString) !== -1){
+      colors.push({
+        name: key,
+        color: semanticColors[key]
+      });
+    }
+  });
+
   return (
     <div className={ styles.themeInspector }>
+      <SearchBox placeholder="Search" underlined={true} onChange={onSearchBoxChanged} />
       <div className={styles.grid}>
         <div className={styles.row}>
-          {Object.keys(semanticColors).map(key => {
-            const color = semanticColors[key];
-            const style: React.CSSProperties = {
-              background: color,
-              borderColor: semanticColors.inputBorder,
-            };
-            return(
-              <div className={styles.item} >
-                <div className={styles.body} style={{borderColor: semanticColors.bodyDivider}}>
-                  <Stack horizontal horizontalAlign={'space-between'}>
-                    <Stack.Item>
-                      <div className={styles.color} style={style}></div>
-                      <span className={styles.name}>{key}</span>
-                    </Stack.Item>
-                    <Stack.Item>
-                      <IconButton data-color={key} iconProps={{iconName: 'Paste'}} onClick={onClickHandler} />
-                    </Stack.Item>
-                  </Stack>
-
-                </div>
-              </div>
-            );
-          })}
+          {colors.length ? colors.map((clr) => {
+            return(<ColorCard color={clr.color} name={clr.name} onClickHandler={onClickHandler} />);
+          }) : 'no colors'}
         </div>
       </div>
     </div>
