@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {IExtensionItemViewerProps} from "./IExtensionItemViewerProps";
-import {TextField, Stack, Icon} from '@fluentui/react';
+import {Stack, Icon} from '@fluentui/react';
 import styles from './ExtensionItemViewer.module.scss';
 import {useContext} from "react";
 import {ConfigurationContext} from "../../../../shared";
@@ -29,18 +29,40 @@ export const ExtensionItemViewer: React.FunctionComponent<IExtensionItemViewerPr
         {schemaExtension.targetTypes.map(t => (<span style={{
           backgroundColor: semanticColors.primaryButtonBackground,
           color: semanticColors.primaryButtonText
-        }}>{t}</span>))}
+        }}><Icon iconName={'SIPMove'} />&nbsp;{t}</span>))}
       </div>
       <p className={styles.extDescription}>{schemaExtension.description}</p>
 
       <div className={styles.extProperties}>
-        {schemaExtension.properties.map(p=>(
-          <div style={{
-            backgroundColor: semanticColors.accentButtonBackground,
-            color: semanticColors.accentButtonText
-          }} className={styles.propertyItem}>
-            <span className={styles.name}>{p.name}</span><span className={styles.type}>: {p.type}</span>
-          </div>))}
+        {schemaExtension.properties.map((p)=>{
+          let iconName: string;
+          switch (p.type) {
+            case 'Integer':
+              iconName = 'NumberField';
+              break;
+            case 'Boolean':
+              iconName = 'ToggleLeft';
+              break;
+            case 'Binary':
+              iconName = 'FileCode';
+              break;
+            case 'DateTime':
+              iconName = 'EventDate';
+              break;
+            default:
+              iconName = 'TextField';
+          }
+
+          return (
+            <div style={{
+              backgroundColor: semanticColors.accentButtonBackground,
+              color: semanticColors.accentButtonText
+            }} className={styles.propertyItem}>
+              <Icon iconName={iconName} className={styles.type} />
+              <span className={styles.name}>{p.name}</span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
