@@ -2,16 +2,6 @@
 
 .extensionsExplorer {
 
-  .row {
-    @include ms-Grid-row;
-  }
-
-  .itemsListCol {
-    @include ms-Grid-col;
-    @include ms-lg4;
-    @include ms-xl4;
-  }
-
   .itemViewerCol {
     @include ms-Grid-col;
     @include ms-lg8;
