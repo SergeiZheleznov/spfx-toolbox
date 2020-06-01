@@ -16,30 +16,6 @@ export const ThemeInspector: React.FunctionComponent<IThemeInspectorProps> = (pr
   const config = useContext(ConfigurationContext);
   const {semanticColors} = config.themeVariant;
   const [searchString, setSearchString] = useState<string>('');
-  const [colors, setColors] = useState<Color[]>([]);
-
-  useEffect(()=>{
-    const array = Object.keys(semanticColors).map((key) => {
-      return {
-        name: key,
-        color: semanticColors[key]
-      } as Color;
-    });
-    setColors(array);
-  },[]);
-
-  useEffect(()=>{
-    const array: Color[] = [];
-    Object.keys(semanticColors).forEach((key) => {
-      if (key.toLowerCase().indexOf(searchString) !== -1){
-        array.push({
-          name: key,
-          color: semanticColors[key]
-        });
-      }
-    });
-    setColors(array);
-  },[searchString]);
 
   const onSearchBoxChanged = (event?: React.ChangeEvent<HTMLInputElement>, newValue?: string) => {
     setSearchString(newValue);
@@ -48,6 +24,16 @@ export const ThemeInspector: React.FunctionComponent<IThemeInspectorProps> = (pr
   const onClickHandler = (event: React.MouseEvent<HTMLButtonElement>): void => {
     copy(event.currentTarget.dataset['color']);
   };
+
+  const colors: Color[] = [];
+  Object.keys(semanticColors).forEach((key) => {
+    if (!searchString || key.toLowerCase().indexOf(searchString) !== -1){
+      colors.push({
+        name: key,
+        color: semanticColors[key]
+      });
+    }
+  });
 
   return (
     <div className={ styles.themeInspector }>

@@ -3,7 +3,7 @@ import {IExtensionItemViewerProps} from "./IExtensionItemViewerProps";
 import {TextField, Stack, Icon} from '@fluentui/react';
 import styles from './ExtensionItemViewer.module.scss';
 import {useContext} from "react";
-import {ConfigurationContext} from "../../../../shared/ConfigurationContext";
+import {ConfigurationContext} from "../../../../shared";
 import {IReadonlyTheme} from "@microsoft/sp-component-base";
 
 export const ExtensionItemViewer: React.FunctionComponent<IExtensionItemViewerProps> = (props) => {

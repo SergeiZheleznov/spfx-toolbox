@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {IExtensionsListItemProps} from "./IExtensionsListItemProps";
-import {ActionButton, Stack} from '@fluentui/react';
+import {ActionButton, Text, Stack} from '@fluentui/react';
 import styles from './ExtensionsListItem.module.scss';
-import {useContext, useEffect} from "react";
-import {ConfigurationContext} from "../../../../shared/ConfigurationContext";
+import {useContext} from "react";
+import {ConfigurationContext, stringToColour} from "../../../../shared";
 import {IReadonlyTheme} from "@microsoft/sp-component-base";
 
 export const ExtensionsListItem: React.FunctionComponent<IExtensionsListItemProps> = (props) => {
@@ -12,15 +12,33 @@ export const ExtensionsListItem: React.FunctionComponent<IExtensionsListItemProp
   const {schemaExtension, active} = props;
 
   return(
-    <Stack horizontal horizontalAlign={'space-between'} className={styles.listItem} style={{
-      borderColor: semanticColors.bodyDivider,
-    }}>
-      <Stack.Item align={'center'}>
-        {schemaExtension.id}
-      </Stack.Item>
-      <Stack.Item>
-        <ActionButton data-schema={schemaExtension.id} onClick={props.onItemSelect} iconProps={{iconName: active ? 'RadioBtnOn' : 'ChevronRight'}} />
-      </Stack.Item>
-    </Stack>
+    <div className={styles.item}>
+      <div className={styles.body} style={{
+        borderColor: stringToColour(schemaExtension.owner)
+      }}>
+        <div className={styles.info}>
+          <Text className={styles.name} nowrap={true} block={true}>{schemaExtension.id}</Text>
+          <Text className={styles.description} nowrap={true} block={true} style={{
+            color: semanticColors.bodySubtext
+          }}>
+            {schemaExtension.description ? schemaExtension.description : '—'}
+          </Text>
+          <div className={styles.extTargetTypes}>
+            {schemaExtension.targetTypes.map(t => (<span style={{
+              backgroundColor: semanticColors.disabledBackground,
+              color: semanticColors.disabledText
+            }}>{t}</span>))}
+          </div>
+        </div>
+        <Stack horizontal horizontalAlign={'space-between'}>
+          <Stack.Item>
+            <ActionButton disabled iconProps={{iconName: 'AllApps'}}>{schemaExtension.properties.length}</ActionButton>
+          </Stack.Item>
+          <Stack.Item>
+            <ActionButton data-schema={schemaExtension.id} onClick={props.onItemSelect} iconProps={{iconName: active ? 'RadioBtnOn' : 'RedEye'}} />
+          </Stack.Item>
+        </Stack>
+      </div>
+    </div>
   );
 };
