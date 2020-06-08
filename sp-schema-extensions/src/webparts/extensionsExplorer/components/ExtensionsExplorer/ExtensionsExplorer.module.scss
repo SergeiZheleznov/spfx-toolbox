@@ -23,4 +23,9 @@
     @include ms-fontColor-white;
   }
 
+  .modal {
+    min-width: 650px;
+    padding: 5rem;
+  }
+
 }
