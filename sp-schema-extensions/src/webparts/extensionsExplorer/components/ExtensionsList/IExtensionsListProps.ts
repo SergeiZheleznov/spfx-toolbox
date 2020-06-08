@@ -3,6 +3,6 @@ import * as React from "react";
 
 export interface IExtensionsListProps {
   items: SchemaExtension[];
-  setSelectedItem: React.Dispatch<React.SetStateAction<SchemaExtension>>;
+  onItemSelected: React.Dispatch<React.SetStateAction<SchemaExtension>>;
   selectedItem: SchemaExtension;
 }

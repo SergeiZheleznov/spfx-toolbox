@@ -4,13 +4,14 @@ import {ExtensionsListItem} from "..";
 import styles from './ExtensionsList.module.scss';
 
 export const ExtensionsList: React.FunctionComponent<IExtensionsListProps> = (props) => {
-  const {items, setSelectedItem, selectedItem} = props;
+  const {items, onItemSelected, selectedItem} = props;
   const onItemSelect = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
     const schemaId: string = event.currentTarget.dataset['schema'];
     const selectedSchema = items.filter(el => el.id === schemaId)[0];
 
     if (selectedSchema){
-      setSelectedItem(selectedSchema);
+      onItemSelected(selectedSchema);
     }
   };
 
