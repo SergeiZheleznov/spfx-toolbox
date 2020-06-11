@@ -1,9 +1,10 @@
 name: SP-Styles
-
 on:
   push:
-    branches: [ sp-styles-dev ]
-
+    branches:
+      - master
+    paths:
+      - 'sp-styles/*'
 jobs:
   build:
 
