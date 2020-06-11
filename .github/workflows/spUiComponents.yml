@@ -1,16 +1,16 @@
-name: SP-Styles
+name: SP-UI-Components
 on:
   push:
     branches:
       - master
     paths:
-      - 'sp-styles/*'
+      - 'sp-ui-components/*'
 jobs:
   build:
 
     runs-on: ubuntu-latest
     env:
-      working-directory: './sp-styles'
+      working-directory: './sp-ui-components'
 
     strategy:
       matrix:
@@ -31,5 +31,5 @@ jobs:
 
     - uses: actions/upload-artifact@v2
       with:
-        name: sp-styles
-        path: ${{env.working-directory}}/sharepoint/solution/sp-styles.sppkg
+        name: sp-ui-components
+        path: ${{env.working-directory}}/sharepoint/solution/sp-ui-componentss.sppkg
