@@ -1,0 +1,35 @@
+name: SP-UI-Components
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'sp-ui-components/*'
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      working-directory: './sp-ui-components'
+
+    strategy:
+      matrix:
+        node-version: [10.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+      working-directory: ${{env.working-directory}}
+    - run: gulp bundle --ship
+      working-directory: ${{env.working-directory}}
+    - run: gulp package-solution --ship
+      working-directory: ${{env.working-directory}}
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: sp-ui-components
+        path: ${{env.working-directory}}/sharepoint/solution/sp-ui-components.sppkg
