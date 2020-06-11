@@ -4,5 +4,11 @@
 
 .spSlider {
   display: block;
-
+  .image {
+    max-height: 760px;
+    object-position: center;
+    object-fit: cover;
+    display: block;
+    width: 100%;
+  }
 }

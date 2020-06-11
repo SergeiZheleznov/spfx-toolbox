@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styles from './SpSlider.module.scss';
 import { ISpSliderProps } from './ISpSliderProps';
-import { escape } from '@microsoft/sp-lodash-subset';
 import Swiper from 'swiper';
 
 export const SpSlider: React.FunctionComponent<ISpSliderProps> = (props) => {
@@ -21,7 +20,7 @@ export const SpSlider: React.FunctionComponent<ISpSliderProps> = (props) => {
       slideDuplicatePrevClass: styles["swiper-slide-duplicate-prev"],
       wrapperClass: styles["swiper-wrapper"],
       autoplay: {
-        delay:1500
+        delay:5000
       },
       loop: true
     });
@@ -31,9 +30,11 @@ export const SpSlider: React.FunctionComponent<ISpSliderProps> = (props) => {
     <div className={styles.spSlider}>
       <div className={ styles["swiper-container"] }>
         <div className={styles["swiper-wrapper"]}>
-            <div className={styles["swiper-slide"]}>Slide 1</div>
-            <div className={styles["swiper-slide"]}>Slide 2</div>
-            <div className={styles["swiper-slide"]}>Slide 3</div>
+          {props.images.map(src=>(
+            <div className={styles["swiper-slide"]}>
+              <img className={styles.image} src={src} alt=""/>
+            </div>
+          ))}
         </div>
         <div className="swiper-pagination"></div>
         <div className="swiper-button-prev"></div>
