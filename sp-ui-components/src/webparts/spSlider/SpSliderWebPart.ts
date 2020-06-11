@@ -6,7 +6,6 @@ import {
   PropertyPaneTextField
 } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'SpSliderWebPartStrings';
 import {SpSlider} from './components/SpSlider';
 import { ISpSliderProps } from './components/ISpSliderProps';
@@ -18,9 +17,6 @@ import {
   LogLevel
 } from "@pnp/logging";
 
-import {File} from "@microsoft/microsoft-graph-types";
-import { graph } from "@pnp/graph";
-
 Logger.subscribe(new ConsoleListener());
 Logger.activeLogLevel = LogLevel.Info;
 const LOG_SOURCE: string = 'ExtensionsExplorerWebPart';
@@ -31,7 +27,6 @@ export interface ISpSliderWebPartProps {
 
 export default class SpSliderWebPart extends BaseClientSideWebPart <ISpSliderWebPartProps> {
 
-  private graphClient: MSGraphClient;
   private themeProvider: ThemeProvider;
   private themeVariant: IReadonlyTheme | undefined;
   private images: string[] = [];
@@ -45,8 +40,8 @@ export default class SpSliderWebPart extends BaseClientSideWebPart <ISpSliderWeb
         this.render();
       });
 
-      this.graphClient = await this.context.msGraphClientFactory.getClient();
-      const response = await this.graphClient.api(`/sites/${this.context.pageContext.site.id}/drive/root:/slider:/children`).get();
+      const graphClient = await this.context.msGraphClientFactory.getClient();
+      const response = await graphClient.api(`/sites/${this.context.pageContext.site.id}/drive/root:/slider:/children`).get();
 
       this.images = response.value.map((el)=>{
         return el.webUrl;
