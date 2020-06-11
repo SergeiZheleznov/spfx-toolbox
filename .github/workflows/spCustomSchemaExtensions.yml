@@ -1,8 +1,10 @@
 name: SP-CustomSchema
 on:
   push:
-    branches: [ sp-custom-schema ]
-
+    branches:
+      - master
+    paths:
+      - 'sp-schema-extensions/*'
 jobs:
   build:
 
