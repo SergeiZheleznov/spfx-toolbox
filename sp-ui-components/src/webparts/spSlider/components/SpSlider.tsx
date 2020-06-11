@@ -20,7 +20,7 @@ export const SpSlider: React.FunctionComponent<ISpSliderProps> = (props) => {
       slideDuplicatePrevClass: styles["swiper-slide-duplicate-prev"],
       wrapperClass: styles["swiper-wrapper"],
       autoplay: {
-        delay:5000
+        delay:5500
       },
       loop: true
     });
